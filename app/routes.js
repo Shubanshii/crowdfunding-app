@@ -108,8 +108,12 @@ module.exports = function(app, passport) {
   app.get("/campaigns", isLoggedIn, (req, res) => {
     console.log("getting");
     Campaign.find().then(campaign => {
-      res.status(201).json(campaign);
+      res.status(200).json(campaign);
     });
+  });
+
+  app.get("/user", isLoggedIn, (req, res) => {
+    res.status(200).json(req.user);
   });
 
   // UPDATE CAMPAIGN
