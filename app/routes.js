@@ -74,6 +74,7 @@ module.exports = function(app, passport) {
   app.post("/campaigns", isLoggedIn, (req, res) => {
     const requiredFields = ["artist", "title", "description", "financialGoal"];
     // console.log(req.session.passport.user);
+    console.log("postcampaign reqbody", req.body);
     User.find().then(user => {
       // console.log(user);
     });
@@ -116,10 +117,15 @@ module.exports = function(app, passport) {
     res.status(200).json(req.user);
   });
 
+  app.get("/your-campaign/:id", isLoggedIn, (req, res) => {
+    res.render("your-campaign");
+  });
+
   // UPDATE CAMPAIGN
   // CANNOT CLICK TO THIS ROUTE IN APP.  STILL NEED TO MAKE EJS PAGE FOR IT
   app.patch("/campaigns/:id", isLoggedIn, (req, res) => {
     console.log(req.body.id);
+    console.log(req.body);
     console.log(req.params.id);
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
       res.status(400).json({
@@ -131,7 +137,7 @@ module.exports = function(app, passport) {
       "artist",
       "title",
       "description",
-      "financialGoal",
+      // "financialGoal",
       "status"
     ];
 
