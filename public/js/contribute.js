@@ -7,7 +7,7 @@ function getFinancialGoal(callback) {
   // console.log('getgoal working');
   const settings = {
     type: "GET",
-    url: '/financialgoal/' + id,
+    url: "/financialgoal/" + id,
     dataType: "json",
     success: callback
   };
@@ -24,15 +24,15 @@ function getFinancialGoal(callback) {
 
 function displayFiles(data) {
   let contributionTotal = 0;
-  console.log('financialGoal', data.financialGoal);
-  console.log('contributions', data.contributions[0].amount);
+  console.log("financialGoal", data.financialGoal);
+  console.log("contributions", data.contributions[0].amount);
   for (let i = 0; i < data.contributions.length; i++) {
     contributionTotal += data.contributions[i].amount;
   }
-  console.log('contributionTotal', contributionTotal);
+  console.log("contributionTotal", contributionTotal);
   if (contributionTotal >= data.financialGoal) {
     // console.log('comparison working');
-    $('.files').append(`<p>${data.files}</p>`);
+    $(".files").append(`<p>${data.files}</p>`);
   }
 }
 
@@ -42,7 +42,7 @@ function addContribution() {
     // console.log('form working');
 
     // console.log(id);
-    var amount = $('.amount').val();
+    var amount = $(".amount").val();
     var dataObject = {
       amount,
       campaignId: id
@@ -51,9 +51,9 @@ function addContribution() {
     // console.log(JSON.stringify(dataObject));
     $.ajax({
       type: "POST",
-      url: '/contributions',
+      url: "/contributions",
       data: JSON.stringify(dataObject),
-      success: function(){},
+      success: function() {},
       dataType: "json",
       contentType: "application/json"
     });
@@ -62,8 +62,6 @@ function addContribution() {
     event.preventDefault();
   });
 }
-
-
 
 // function addContribution() {
 //   $( ".contribution-form" ).submit(function( event ) {
@@ -111,11 +109,11 @@ function addContribution() {
 //   });
 // }
 function deleteCampaign() {
-  $('.delete-button').on('click', function(e) {
+  $(".delete-button").on("click", function(e) {
     $.ajax({
       type: "DELETE",
-      url: '/campaigns/' + id,
-      success: function(){},
+      url: "/campaigns/" + id,
+      success: function() {},
       dataType: "json",
       contentType: "application/json"
     });
@@ -123,9 +121,8 @@ function deleteCampaign() {
 }
 
 $(function() {
-
-    addContribution();
-    deleteCampaign();
-    // getFinancialGoal();
-    // getFinancialInfo(displayFiles);
-})
+  addContribution();
+  deleteCampaign();
+  // getFinancialGoal();
+  // getFinancialInfo(displayFiles);
+});
