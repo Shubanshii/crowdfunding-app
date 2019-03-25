@@ -70,11 +70,24 @@ function createCampaign() {
   });
 }
 
+function deleteCampaign() {
+  $(".delete").on("click", function(e) {
+    $.ajax({
+      type: "DELETE",
+      url: "/campaigns/" + id,
+      success: function() {},
+      dataType: "json",
+      contentType: "application/json"
+    });
+  });
+}
+
 //  on page load do this
 $(function() {
   // getAndDisplayCampaigns();
   // displayCampaigns();
   // addContribution();
   createCampaign();
+  deleteCampaign();
   // getFinancialInfo(displayFiles);
 });
